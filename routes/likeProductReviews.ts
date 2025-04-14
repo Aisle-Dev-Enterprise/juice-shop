@@ -22,7 +22,7 @@ module.exports = function productReviews () {
         const likedBy = review.likedBy
         if (!likedBy.includes(user.data.email)) {
           db.reviewsCollection.update(
-            { _id: id },
+            { _id: id.toString() },
             { $inc: { likesCount: 1 } }
           ).then(
             () => {
@@ -39,7 +39,7 @@ module.exports = function productReviews () {
                   }
                   challengeUtils.solveIf(challenges.timingAttackChallenge, () => { return count > 2 })
                   db.reviewsCollection.update(
-                    { _id: id },
+                    { _id: id.toString() },
                     { $set: { likedBy } }
                   ).then(
                     (result: any) => {
